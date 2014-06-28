@@ -8,6 +8,6 @@ import com.parse.ui.ParseLoginDispatchActivity
 public class LoginDispatchActivity() : ParseLoginDispatchActivity() {
 
     override fun getTargetClass(): Class<*> {
-        return javaClass<MainActivity>()
+        return javaClass<BoardActivity>()
     }
 }
