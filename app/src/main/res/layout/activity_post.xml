@@ -6,7 +6,7 @@
              android:layout_height="match_parent">
 
     <fragment
-        android:name="com.iamemustan.tsubufc_board.BoardFragment"
+        android:name="com.iamemustan.tsubufc_board.PostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
