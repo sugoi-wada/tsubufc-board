@@ -4,5 +4,7 @@
     <string name="app_name">tsubufc-board</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="profile_title_logged_in">ログインしてます</string>
+    <string name="profile_logout_button_label">ログアウト</string>
 
 </resources>

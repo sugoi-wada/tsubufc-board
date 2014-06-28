@@ -1,1 +1,3 @@
-include ':app'
+include ':app', ':parseUI:ParseLoginUI'
+include 'facebook-sdk'
+project(':facebook-sdk').projectDir = new File('parseUI/facebook-sdk/facebook')
