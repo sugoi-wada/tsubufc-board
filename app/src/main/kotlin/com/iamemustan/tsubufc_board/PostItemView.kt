@@ -6,13 +6,14 @@ import kotlin.properties.Delegates
 import android.widget.LinearLayout
 import android.view.ContextMenu
 import android.util.AttributeSet
+import android.widget.RelativeLayout
 
 
 /**
  * Created by watyaa on 2014/06/28.
  */
 
-public open class PostItemView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+public open class PostItemView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     override fun createContextMenu(menu: ContextMenu?) {
         throw UnsupportedOperationException()
     }
@@ -21,9 +22,9 @@ public open class PostItemView(context: Context, attrs: AttributeSet) : LinearLa
 
 
     override fun onFinishInflate() {
-        super<LinearLayout>.onFinishInflate()
-        mAuthorTextView = findViewById(R.id.author) as TextView
-        mCommentTextView = findViewById(R.id.comment) as TextView
+        super<RelativeLayout>.onFinishInflate()
+        mAuthorTextView = findViewById(R.id.UserName) as TextView
+        mCommentTextView = findViewById(R.id.ContentText) as TextView
     }
 
     public fun setValues(post: Post) {
