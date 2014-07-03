@@ -1,51 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+
+<com.iamemustan.tsubufc_board.PostItemView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_launcher"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:text="UserName"
+        android:textStyle="bold"/>
 
-        <ImageView
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_launcher"/>
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toRightOf="@id/userName"
+        android:gravity="right"
+        android:text="0000/00/00"/>
 
-        <TextView
-            android:id="@+id/UserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
-            android:text="UserName"
-            android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/userName"
+        android:layout_below="@id/userName"
+        android:text="会話内容"/>
 
-        <TextView
-            android:id="@+id/DateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toRightOf="@+id/UserName"
-            android:gravity="right"
-            android:text="0000/00/00"/>
+</com.iamemustan.tsubufc_board.PostItemView>
 
-        <TextView
-            android:id="@+id/ContentText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/UserName"
-            android:layout_below="@+id/UserName"
-            android:text="会話内容"/>
-
-    </RelativeLayout>
-
-</LinearLayout>

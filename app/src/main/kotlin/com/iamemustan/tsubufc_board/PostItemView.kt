@@ -23,8 +23,8 @@ public open class PostItemView(context: Context, attrs: AttributeSet) : Relative
 
     override fun onFinishInflate() {
         super<RelativeLayout>.onFinishInflate()
-        mAuthorTextView = findViewById(R.id.UserName) as TextView
-        mCommentTextView = findViewById(R.id.ContentText) as TextView
+        mAuthorTextView = findViewById(R.id.userName) as TextView
+        mCommentTextView = findViewById(R.id.comment) as TextView
     }
 
     public fun setValues(post: Post) {
