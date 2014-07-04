@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 buildscript {
-    ext.kotlin_version = '0.7.1090'
+    ext.kotlin_version = '0.8.11'
     repositories {
         mavenCentral()
     }
