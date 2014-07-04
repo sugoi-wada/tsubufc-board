@@ -14,9 +14,6 @@ import android.widget.RelativeLayout
  */
 
 public open class PostItemView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
-    override fun createContextMenu(menu: ContextMenu?) {
-        throw UnsupportedOperationException()
-    }
     var mAuthorTextView: TextView by Delegates.notNull()
     var mCommentTextView: TextView by Delegates.notNull()
 

@@ -13,6 +13,9 @@ import android.content.Intent
 import com.parse.ParseQuery
 import com.parse.FindCallback
 import com.parse.ParseException
+import com.parse.ParseFacebookUtils
+import com.facebook.Request
+import com.parse.ParseUser
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -23,6 +26,7 @@ public class BoardFragment : Fragment() {
     var mListView: ListView by Delegates.notNull()
     var mAdapter: BoardAdapter by Delegates.notNull()
     var mPostBtn: Button by Delegates.notNull()
+    val mUser = ParseUser.getCurrentUser()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_board, container, false)
@@ -31,15 +35,18 @@ public class BoardFragment : Fragment() {
         return view
     }
 
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super<Fragment>.onViewCreated(view, savedInstanceState)
-
         mAdapter = BoardAdapter(getActivity() as Context)
 
-        val query = ParseQuery.getQuery(javaClass<PostParseObject>())
-        query?.findInBackground(object : FindCallback<PostParseObject>() {
+        val session = ParseFacebookUtils.getSession();
+        if (session != null && session.isOpened()) {
+            makeMeRequest()
+        }
 
+
+        val query = ParseQuery.getQuery(javaClass<PostParseObject>())
+        query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
             override fun done(list: List<PostParseObject>?, e: ParseException?) {
                 list?.forEach { postObj ->
                     val post = Post()
@@ -49,19 +56,20 @@ public class BoardFragment : Fragment() {
                 }
             }
         })
-
-        val post = Post()
-        post.name = "nanashi"
-        post.comment = "comment"
-
-        mAdapter.add(post)
-        mAdapter.add(post)
-        mAdapter.add(post)
-
-
         mListView.setAdapter(mAdapter)
         mPostBtn.setOnClickListener { view ->
             startActivity(Intent(getActivity() as Context, javaClass<PostActivity>()))
         }
     }
+
+    fun makeMeRequest() {
+        Request.newMeRequest(ParseFacebookUtils.getSession(), {(user, response) ->
+            if (user != null) {
+                mUser?.put("facebookId", user.getId())
+                mUser?.saveInBackground()
+            }
+        })?.executeAsync()
+    }
+
+
 }
