@@ -7,4 +7,5 @@ package com.iamemustan.tsubufc_board
 public class Post {
     var name = ""
     var comment = ""
+    var date = ""
 }

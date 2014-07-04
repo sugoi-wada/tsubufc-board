@@ -16,6 +16,8 @@ import com.parse.ParseException
 import com.parse.ParseFacebookUtils
 import com.facebook.Request
 import com.parse.ParseUser
+import java.text.SimpleDateFormat
+import java.util.Date
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -48,12 +50,14 @@ public class BoardFragment : Fragment() {
         val query = ParseQuery.getQuery(javaClass<PostParseObject>())
         query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
             override fun done(list: List<PostParseObject>?, e: ParseException?) {
-                list?.forEach { postObj ->
+                list?.forEach({ postObj ->
                     val post = Post()
                     post.name = postObj.getDisplayName() as String
                     post.comment = postObj.getComment() as String
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+                    post.date = sdf.format(Date(postObj.getDate() as Long)) as String
                     mAdapter.add(post)
-                }
+                })
             }
         })
         mListView.setAdapter(mAdapter)

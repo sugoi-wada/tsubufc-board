@@ -3,8 +3,6 @@ package com.iamemustan.tsubufc_board
 import android.content.Context
 import android.widget.TextView
 import kotlin.properties.Delegates
-import android.widget.LinearLayout
-import android.view.ContextMenu
 import android.util.AttributeSet
 import android.widget.RelativeLayout
 
@@ -16,17 +14,19 @@ import android.widget.RelativeLayout
 public open class PostItemView(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
     var mAuthorTextView: TextView by Delegates.notNull()
     var mCommentTextView: TextView by Delegates.notNull()
-
+    var mDateTextView: TextView by Delegates.notNull()
 
     override fun onFinishInflate() {
         super<RelativeLayout>.onFinishInflate()
         mAuthorTextView = findViewById(R.id.userName) as TextView
         mCommentTextView = findViewById(R.id.comment) as TextView
+        mDateTextView = findViewById(R.id.date) as TextView
     }
 
     public fun setValues(post: Post) {
         mAuthorTextView.setText(post.name)
-        mCommentTextView.setText(post.comment);
+        mCommentTextView.setText(post.comment)
+        mDateTextView.setText(post.date)
     }
 }
 
