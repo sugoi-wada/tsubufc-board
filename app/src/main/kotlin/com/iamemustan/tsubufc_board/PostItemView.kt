@@ -5,6 +5,8 @@ import android.widget.TextView
 import kotlin.properties.Delegates
 import android.util.AttributeSet
 import android.widget.RelativeLayout
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 /**
@@ -23,10 +25,12 @@ public open class PostItemView(context: Context, attrs: AttributeSet) : Relative
         mDateTextView = findViewById(R.id.date) as TextView
     }
 
-    public fun setValues(post: Post) {
-        mAuthorTextView.setText(post.name)
-        mCommentTextView.setText(post.comment)
-        mDateTextView.setText(post.date)
+    public fun setValues(post: PostParseObject) {
+        mAuthorTextView.setText(post.getDisplayName())
+        mCommentTextView.setText(post.getComment())
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val date = sdf.format(Date(post.getDate() as Long))
+        mDateTextView.setText(date)
     }
 }
 

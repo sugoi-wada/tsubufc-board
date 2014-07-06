@@ -50,14 +50,7 @@ public class BoardFragment : Fragment() {
         val query = ParseQuery.getQuery(javaClass<PostParseObject>())
         query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
             override fun done(list: List<PostParseObject>?, e: ParseException?) {
-                list?.forEach({ postObj ->
-                    val post = Post()
-                    post.name = postObj.getDisplayName() as String
-                    post.comment = postObj.getComment() as String
-                    val sdf = SimpleDateFormat("yyyy-MM-dd")
-                    post.date = sdf.format(Date(postObj.getDate() as Long)) as String
-                    mAdapter.add(post)
-                })
+                mAdapter.addAll(list)
             }
         })
         mListView.setAdapter(mAdapter)

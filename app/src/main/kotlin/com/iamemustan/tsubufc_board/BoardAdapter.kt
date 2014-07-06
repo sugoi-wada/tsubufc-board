@@ -10,7 +10,7 @@ import android.view.LayoutInflater
  * Created by watyaa on 2014/06/28.
  */
 
-public class BoardAdapter(context: Context) : ArrayAdapter<Post>(context, 0) {
+public class BoardAdapter(context: Context) : ArrayAdapter<PostParseObject>(context, 0) {
 
     var inflater: LayoutInflater
     {
@@ -20,7 +20,7 @@ public class BoardAdapter(context: Context) : ArrayAdapter<Post>(context, 0) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         val view = convertView ?: inflater.inflate(R.layout.view_post_item, null)
 
-        (view as PostItemView).setValues(getItem(position) as Post)
+        (view as PostItemView).setValues(getItem(position) as PostParseObject)
         return view
     }
 }
