@@ -4,7 +4,6 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="@dimen/com_parse_ui_vertical_margin"
                 android:paddingLeft="@dimen/com_parse_ui_horizontal_margin"
                 android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
                 android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
@@ -12,10 +11,17 @@
                 android:orientation="vertical"
                 android:background="@drawable/lawn">
 
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@android:id/list"/>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@android:id/list"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/postBtn"

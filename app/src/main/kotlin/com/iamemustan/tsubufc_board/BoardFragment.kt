@@ -16,8 +16,7 @@ import com.parse.ParseException
 import com.parse.ParseFacebookUtils
 import com.facebook.Request
 import com.parse.ParseUser
-import java.text.SimpleDateFormat
-import java.util.Date
+import android.support.v4.widget.SwipeRefreshLayout
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -28,12 +27,14 @@ public class BoardFragment : Fragment() {
     var mListView: ListView by Delegates.notNull()
     var mAdapter: BoardAdapter by Delegates.notNull()
     var mPostBtn: Button by Delegates.notNull()
+    var mSwipeLayout: SwipeRefreshLayout by Delegates.notNull()
     val mUser = ParseUser.getCurrentUser()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_board, container, false)
         mListView = view?.findViewById(android.R.id.list) as ListView
         mPostBtn = view?.findViewById(R.id.postBtn) as Button
+        mSwipeLayout = view?.findViewById(R.id.refresh) as SwipeRefreshLayout
         return view
     }
 
@@ -56,6 +57,20 @@ public class BoardFragment : Fragment() {
         mListView.setAdapter(mAdapter)
         mPostBtn.setOnClickListener { view ->
             startActivity(Intent(getActivity() as Context, javaClass<PostActivity>()))
+        }
+
+        mSwipeLayout.setColorSchemeResources(android.R.color.white, android.R.color.black, android.R.color.holo_green_light, android.R.color.holo_blue_light)
+        mSwipeLayout.setOnRefreshListener {
+            val query = ParseQuery.getQuery(javaClass<PostParseObject>())
+            query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
+                override fun done(list: List<PostParseObject>?, e: ParseException?) {
+                    if (e == null) {
+                        mAdapter.clear()
+                        mAdapter.addAll(list)
+                        mSwipeLayout.setRefreshing(false);
+                    }
+                }
+            })
         }
     }
 
