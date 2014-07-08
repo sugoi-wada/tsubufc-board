@@ -4,6 +4,8 @@ import android.app.Application
 import com.parse.Parse
 import com.parse.ParseFacebookUtils
 import com.parse.ParseObject
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
+import com.nostra13.universalimageloader.core.ImageLoader
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -28,5 +30,9 @@ public class TsubuFcApplication : Application() {
         // Optional - If you don't want to allow Twitter login, you can
         // remove this line (and other related ParseTwitterUtils calls)
         // ParseTwitterUtils.initialize(getString(R.string.twitter_consumer_key), getString(R.string.twitter_consumer_secret))
+
+        // Create global configuration and initialize ImageLoader with this configuration
+        val config = ImageLoaderConfiguration.createDefault(getApplicationContext())
+        ImageLoader.getInstance()?.init(config)
     }
 }

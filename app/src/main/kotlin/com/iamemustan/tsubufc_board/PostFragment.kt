@@ -56,7 +56,7 @@ public class PostFragment : Fragment() {
 
     fun post(): Boolean {
         val post = PostParseObject()
-        post.setDisplayName(mUser?.getString("name"))
+        post.setUser(mUser)
         post.setComment(mCommentTextView.getText().toString())
         post.setDate(System.currentTimeMillis())
         post.saveInBackground(object : SaveCallback() {

@@ -2,6 +2,7 @@ package com.iamemustan.tsubufc_board
 
 import com.parse.ParseObject
 import com.parse.ParseClassName
+import com.parse.ParseUser
 
 /**
  * Created by watyaa on 2014/07/04.
@@ -10,12 +11,12 @@ import com.parse.ParseClassName
 ParseClassName("PostParseObject")
 public open class PostParseObject : ParseObject() {
 
-    public fun getDisplayName(): String? {
-        return getString("displayName")
+    public fun getUser(): ParseUser? {
+        return get("user") as ParseUser
     }
 
-    public fun setDisplayName(name: String?) {
-        put("displayName", name)
+    public fun setUser(user: ParseUser?) {
+        put("user", user)
     }
 
     public fun getComment(): String? {
