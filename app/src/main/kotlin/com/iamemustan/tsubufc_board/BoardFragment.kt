@@ -47,31 +47,27 @@ public class BoardFragment : Fragment() {
             makeMeRequest()
         }
 
-
-        val query = ParseQuery.getQuery(javaClass<PostParseObject>())
-        query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
-            override fun done(list: List<PostParseObject>?, e: ParseException?) {
-                mAdapter.addAll(list)
-            }
-        })
+        reload()
         mListView.setAdapter(mAdapter)
         mPostBtn.setOnClickListener { view ->
             startActivity(Intent(getActivity() as Context, javaClass<PostActivity>()))
         }
 
         mSwipeLayout.setColorSchemeResources(android.R.color.white, android.R.color.black, android.R.color.holo_green_light, android.R.color.holo_blue_light)
-        mSwipeLayout.setOnRefreshListener {
-            val query = ParseQuery.getQuery(javaClass<PostParseObject>())
-            query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
-                override fun done(list: List<PostParseObject>?, e: ParseException?) {
-                    if (e == null) {
-                        mAdapter.clear()
-                        mAdapter.addAll(list)
-                        mSwipeLayout.setRefreshing(false);
-                    }
+        mSwipeLayout.setOnRefreshListener { reload() }
+    }
+
+    fun reload() {
+        val query = ParseQuery.getQuery(javaClass<PostParseObject>())
+        query?.orderByDescending("date")?.findInBackground(object : FindCallback<PostParseObject>() {
+            override fun done(list: List<PostParseObject>?, e: ParseException?) {
+                if (e == null) {
+                    mAdapter.clear()
+                    mAdapter.addAll(list)
+                    mSwipeLayout.setRefreshing(false);
                 }
-            })
-        }
+            }
+        })
     }
 
     fun makeMeRequest() {
@@ -82,6 +78,4 @@ public class BoardFragment : Fragment() {
             }
         })?.executeAsync()
     }
-
-
 }
