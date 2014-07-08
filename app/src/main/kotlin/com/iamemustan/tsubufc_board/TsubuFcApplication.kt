@@ -6,6 +6,9 @@ import com.parse.ParseFacebookUtils
 import com.parse.ParseObject
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 import com.nostra13.universalimageloader.core.ImageLoader
+import com.parse.PushService
+import com.parse.ParseInstallation
+import com.parse.ParseAnalytics
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -22,6 +25,9 @@ public class TsubuFcApplication : Application() {
         Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key))
 
         Parse.setLogLevel(Parse.LOG_LEVEL_WARNING)
+
+        PushService.setDefaultPushCallback(this, javaClass<LoginDispatchActivity>())
+        ParseInstallation.getCurrentInstallation()?.saveInBackground()
 
         // Optional - If you don't want to allow Facebook login, you can
         // remove this line (and other related ParseFacebookUtils calls)

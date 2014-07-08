@@ -17,6 +17,7 @@ import com.parse.ParseFacebookUtils
 import com.facebook.Request
 import com.parse.ParseUser
 import android.support.v4.widget.SwipeRefreshLayout
+import com.parse.ParseAnalytics
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -40,6 +41,7 @@ public class BoardFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super<Fragment>.onViewCreated(view, savedInstanceState)
+        ParseAnalytics.trackAppOpened(getActivity()?.getIntent())
         mAdapter = BoardAdapter(getActivity() as Context)
 
         val session = ParseFacebookUtils.getSession();
