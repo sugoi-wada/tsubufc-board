@@ -17,6 +17,9 @@ import com.parse.ParseFacebookUtils
 import com.facebook.Request
 import com.parse.ParseUser
 import android.support.v4.widget.SwipeRefreshLayout
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 
 /**
  * Created by watyaa on 2014/06/28.
@@ -40,6 +43,8 @@ public class BoardFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super<Fragment>.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+
         mAdapter = BoardAdapter(getActivity() as Context)
 
         val session = ParseFacebookUtils.getSession();
@@ -77,5 +82,24 @@ public class BoardFragment : Fragment() {
                 mUser?.saveInBackground()
             }
         })?.executeAsync()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        val inflater = getActivity()?.getMenuInflater()
+        inflater?.inflate(R.menu.board, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.getItemId()) {
+            R.id.logout -> logout()
+            else -> super<Fragment>.onOptionsItemSelected(item)
+        }
+    }
+
+    fun logout(): Boolean {
+        ParseUser.logOut()
+        startActivity(Intent(getActivity() as Context, javaClass<DispatchLoginActivity>()))
+        getActivity()?.finish()
+        return true
     }
 }

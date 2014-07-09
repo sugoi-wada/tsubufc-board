@@ -7,5 +7,6 @@
     <string name="profile_title_logged_in">ログインしてます</string>
     <string name="profile_logout_button_label">ログアウト</string>
     <string name="post">投稿</string>
+    <string name="logout">ログアウト</string>
 
 </resources>
